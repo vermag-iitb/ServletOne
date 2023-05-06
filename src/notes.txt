@@ -1,0 +1,89 @@
+Setting up Tomcat in Eclipse:
+-----------------------------
+(Reference: https://www.baeldung.com/eclipse-tomcat)
+
+Step 1: (Defining a Server in Eclipse) 
+File > New > Other -> Server -> Server -> Next -> Select Tomcat <version> -> 
+Give Server's host name (e.g.: localhost) -> Next -> 
+Select (Directory of installation, JRE version) -> Finish
+
+Step 2: (Configuring Tomcat server)
+Window menu -> Perspective -> Open Perspective -> Other -> Java EE -> Ok
+
+Servers (in Bottom pane) -> Rt. click on Tomcat Server -> New -> Server ->
+Expand Apache -> Select Tomcat <version> -> Click Next -> 
+Select Tomcat Installation directory -> Add your Servlet -> Finish
+
+Step 3: (To check port number)
+Servers (in Bottom pane) -> Double click on Tomcat Server -> Verify Server & Admin ports  
+
+Creating a Servlet project in Eclipse
+-------------------------------------
+Step 1: 
+File menu -> New -> Dynamic Web Project -> <Give project name> -> 
+Next -> Next -> Check the box for Generating web.xml -> Finish
+
+Step 2: 
+Rt. click on Project name (in Project Explorer on RHS) -> New -> 
+Servlet -> Give package name (or choose existing) -> 
+Give class name (Servlet class name) -> 
+Give super class name (like javax.servlet.GenericServlet) ->
+Next -> Select URL-pattern (from list) -> Edit name (as per choice) ->
+OK -> Next -> Select methods to be overridden (like service, etc) ->
+Finish
+
+Step 3: 
+Write definition for servlet
+
+Step 4: (Run the application)
+Rt click on project (in Project Explorer on RHS) -> Run As -> Run on Server ->
+Save -> Expand localhost -> Click Tomcat (with version) -> Next -> Finish
+
+Once on browser window -> add <url-pattern> to the url to run your servlet
+
+Step 4: (Change browser)
+Window Menu -> Web Browser -> Select Any Browser (Internal Web Browser)
+
+
+Eclipse Shortcuts:
+------------------
+
+1. Add imports of classes missing 				- Command+Shift+'o'
+2. Increase/Decrease font size 					- Command + '+/-'
+3. To format all lines in the editor 			- Command+Shift+'f'
+4. To add try-catch block 						- Option+Shift+'z'
+5. To search a class in all projects			- Command+Shift+'r'
+6. To close editor/all editors					- Ctrl+'w' / Ctrl+Shift+'w'
+7. To complete SOP/main method/for loop 		- Type 'sysout'/'main'/'for' and Ctrl+'space'
+
+ANNOTATIONS:
+------------
+
+Def.: Used to pass some additional information to server
+Examples: 
+- @WebServlet	: used to specify url-pattern of the Servlet. Available from Servlet 3.0 onwards. 
+				  This is an alternative for web.xml and don't need to checkbox for creating web.xml.
+- @WebListener	: 
+- @WebFilter	: 
+
+Object creation sequence by Web Container:
+------------------------------------------
+1. ServletContext		: object of this class is created by Web-container when web-application is deployed on server.
+2. User-defined servlet	: object of this class is created by Web-container when first request comes to server. 
+						  This by-default calls init() and service().
+3. ServletConfig		: object of this class is created by web-container when init() is called, i.e., only once at 
+						  the first request.
+4. ServletRequest and ServletResponse : these objects are created by web-container for every request.
+
+Request Parameters: 
+-------------------
+- they are sent in pairs (request parameter names: request parameter values)
+- "request parameter values": are provided by user
+- To receive request parameters values from HTML page, following methods from "javax.servlet.ServletRequest" interface are used:
+	i. 		public abstract String getParameter(String); 				- takes name of the parameter and returns only one value of the parameter (e.g.: first name - Gaurav)
+	ii. 	public abstract Enumeration<String> getParameterNames();	- returns all values with names as a Collection (e.g.: )
+	iii.	public abstract String[] getParameterValues(String);		- returns multiple parameter values for one parameter name (e.g.: Hobbies - walking, dancing, etc.)
+	iv.		public abstract Map<String, String[]> getParameterMap();	- returns two dimensional Collection for all parameter 
+																		  groups. However, it has to be converted to 1-dimension and then iterated.
+																		  
+	
